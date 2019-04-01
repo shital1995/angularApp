@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <form #regForm="ngForm" (ngSubmit)="register(regForm.value)" class="form col-6 offset-3">
+    <div class="form-group">
+      <label for="fullname">Full Name</label>
+      <div class="input-group">
+        <input name="fullname" #fn='ngModel' required [(ngModel)]="regName.fullname" type="text" class="form-control" pattern="[a-zA-Z]{3,}[ ]{1}[a-zA-Z]{3,}" />
+        <!-- <div class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa" [class.fa-check]="fn.valid" [class.fa-times]="fn.hasError('pattern') && fn.touched"></i>
+            </span>
+          </div> -->
+      </div>
+      <div class="alert alert-danger" *ngIf="fn.hasError('required') && (fn.dirty || fn.touched)" >
+        This field is required.
+      </div>
+      <div class="alert alert-danger" *ngIf="fn.hasError('pattern') && fn.touched" >
+          Invalid Full Name eg: FirstName LastName.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fullname">Email</label>
+      <input name="email" #em='ngModel' required [(ngModel)]="regName.email"  type="email" class="form-control" pattern="[a-zA-Z0-9_]{3,}[@]{1}[a-zA-Z0-9]{2,}[.]{1}[a-zA-Z]{2,}" />
+      <div class="alert alert-danger" *ngIf="em.hasError('required') && (em.dirty || em.touched)" >
+          This field is required.
+        </div>
+        <div class="alert alert-danger" *ngIf="em.hasError('pattern') && em.touched" >
+            Invalid Email.
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="fullname">Mobile</label>
+      <input name="mobile" #mb='ngModel' required [(ngModel)]="regName.mobile"  type="text" class="form-control" pattern="[0-9]{10}" />
+      <div class="alert alert-danger" *ngIf="mb.hasError('required') && (mb.dirty || mb.touched)" >
+          This field is required.
+        </div>
+        <div class="alert alert-danger" *ngIf="mb.hasError('pattern') && mb.touched" >
+            Invalid Mobile Number
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="fullname">Password</label>
+      <div class="input-group">
+      <input id="pwd" name="password" required #pwd='ngModel' [(ngModel)]="regName.password"  type="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+      <div (click)="show()" class="input-group-append">
+          <span class="input-group-text">
+            <i id="icon" class="fa fa-eye"></i>
+          </span>
+        </div>
+      </div>
+      <div class="alert alert-danger" *ngIf="pwd.hasError('required') && (pwd.dirty || pwd.touched)" >
+          This field is required.
+        </div>
+        <div class="alert alert-danger" *ngIf="pwd.hasError('pattern') && pwd.touched" >
+            Invalid Password.
+        </div>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="fullname">Confirm Password</label>
+      <div class="input-group">
+      <input id="pwd_1" name="cpassword" required #cpwd='ngModel' [(ngModel)]="regName.cpassword"  type="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+      <div (click)="show2()" class="input-group-append">
+          <span class="input-group-text">
+            <i id="icon_1" class="fa fa-eye"></i>
+          </span>
+        </div>
+      </div>
+      <div class="alert alert-danger" *ngIf="cpwd.hasError('required') && (cpwd.dirty || cpwd.touched)" >
+          This field is required.
+        </div>
+        <div class="alert alert-danger" *ngIf="cpwd.hasError('pattern') && cpwd.touched" >
+            Invalid Password.
+        </div>
+        <div class="alert alert-danger" *ngIf="cpwd.touched && pwd.value!=cpwd.value" >
+          Password Not Match. {{pwd.value!=cpwd.value}}
+      </div>
+    </div> -->
+
+    <div class="form-group text-right">
+      <button class="btn btn-danger" type="reset">Reset</button>&nbsp;&nbsp;
+      <button class="btn btn-success" [disabled]="regForm.invalid" type="submit">Register</button>
+    </div>
+  </form>
+  <div class="clearfix"></div>
+</div>
